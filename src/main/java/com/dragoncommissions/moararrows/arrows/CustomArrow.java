@@ -4,6 +4,7 @@ import com.dragoncommissions.moararrows.addons.NameSpace;
 import org.bukkit.Material;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Entity;
+import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.entity.ProjectileHitEvent;
@@ -12,7 +13,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.List;
 
-public abstract class CustomArrow {
+public abstract class CustomArrow implements Listener {
 
     public abstract List<String> getLore();
     public abstract String getDisplayName();
@@ -36,7 +37,7 @@ public abstract class CustomArrow {
 
     public boolean is(ItemStack itemStack) {
         try {
-            return itemStack.getType() == Material.ARROW && itemStack.getItemMeta().getCustomModelData() == getCustomModelData();
+            return itemStack.getType() == Material.ARROW && itemStack.getItemMeta().hasCustomModelData() && itemStack.getItemMeta().getCustomModelData() == getCustomModelData();
         } catch (NullPointerException ignored) {
             return false;
         }

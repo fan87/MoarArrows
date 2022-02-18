@@ -3,7 +3,6 @@ package com.dragoncommissions.moararrows.arrows.impl;
 import com.dragoncommissions.moararrows.MoarArrows;
 import com.dragoncommissions.moararrows.MoarArrowsConfig;
 import com.dragoncommissions.moararrows.addons.NameSpace;
-import com.dragoncommissions.moararrows.arrows.Arrows;
 import com.dragoncommissions.moararrows.arrows.CustomArrow;
 import com.dragoncommissions.moararrows.utils.ColorUtils;
 import com.dragoncommissions.moararrows.utils.InventoryUtils;
@@ -14,10 +13,8 @@ import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
-import org.bukkit.inventory.ItemStack;
 import org.bukkit.projectiles.ProjectileSource;
 
-import java.util.HashMap;
 import java.util.List;
 
 public class InfinityArrow extends CustomArrow {

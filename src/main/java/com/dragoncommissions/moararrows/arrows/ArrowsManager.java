@@ -13,7 +13,6 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.*;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.plugin.Plugin;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
@@ -21,7 +20,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 
-public class Arrows implements Listener {
+public class ArrowsManager implements Listener {
 
     @Getter
     private static final Map<NameSpace, CustomArrow> registeredArrows = new HashMap<>();
@@ -35,7 +34,7 @@ public class Arrows implements Listener {
     public static InfinityArrow INFINITY_ARROW;
 
     static {
-        for (Field field : Arrows.class.getDeclaredFields()) {
+        for (Field field : ArrowsManager.class.getDeclaredFields()) {
             if (    Modifier.isStatic(field.getModifiers())
                     && Modifier.isPublic(field.getModifiers())
                     && CustomArrow.class.isAssignableFrom(field.getType())
@@ -59,6 +58,7 @@ public class Arrows implements Listener {
 
     public static void registerCustomArrow(CustomArrow arrow) {
         registeredArrows.put(arrow.getNamespace(), arrow);
+        MoarArrows.registerListener(arrow);
     }
 
     public static CustomArrow getCustomArrowOfItem(ItemStack itemStack) {
@@ -72,10 +72,11 @@ public class Arrows implements Listener {
     private final MoarArrows plugin;
 
     @SneakyThrows
-    public Arrows(MoarArrows plugin) {
+    public ArrowsManager(MoarArrows plugin) {
         this.plugin = plugin;
         INFINITY_ARROW = new InfinityArrow(plugin);
         registerCustomArrow(INFINITY_ARROW);
+        MoarArrows.registerListener(this);
     }
 
     public void onEnable() {
