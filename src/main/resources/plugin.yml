@@ -3,3 +3,8 @@ version: '${project.version}'
 main: com.dragoncommissions.moararrows.MoarArrows
 api-version: 1.18
 description: A plugin gives you more intersting arrows.
+commands:
+  givearrow:
+    usage: /givearrow <Arrow Name> [Amount]
+    permission: moararrows.givearrow
+    description: Gives you arrows
