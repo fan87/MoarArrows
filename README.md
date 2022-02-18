@@ -87,7 +87,14 @@ public class DiamondArrow extends CustomArrow {
 
 -----
 
-#### Particle List
+### Developing
+We are using maven, to build this project:
+```shell
+mvn clean package
+```
+You can also hotswap without an issue.
+
+### Particle List
 ```
 ASH
 BARRIER
