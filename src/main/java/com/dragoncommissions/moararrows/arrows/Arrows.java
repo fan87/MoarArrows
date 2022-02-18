@@ -4,6 +4,7 @@ import com.dragoncommissions.moararrows.MoarArrows;
 import com.dragoncommissions.moararrows.addons.NameSpace;
 import com.dragoncommissions.moararrows.arrows.impl.BundleOfArrows;
 import com.dragoncommissions.moararrows.arrows.impl.DiamondArrow;
+import com.dragoncommissions.moararrows.arrows.impl.EndCrystalArrow;
 import lombok.Getter;
 import lombok.SneakyThrows;
 import org.bukkit.Bukkit;
@@ -35,6 +36,7 @@ public class Arrows implements Listener {
 
     public static final BundleOfArrows BUNDLE_OF_ARROWS = new BundleOfArrows();
     public static final DiamondArrow DIAMOND_ARROW = new DiamondArrow();
+    public static final EndCrystalArrow END_CRYSTAL_ARROW = new EndCrystalArrow();
 
     static {
         for (Field field : Arrows.class.getDeclaredFields()) {
@@ -44,7 +46,7 @@ public class Arrows implements Listener {
             ) {
                 try {
                     CustomArrow customArrow = (CustomArrow) field.get(null);
-                    registeredArrows.put(customArrow.getNamespace(), customArrow);
+                    registerCustomArrow(customArrow);
                 } catch (Exception e) {
                     e.printStackTrace();
                     System.err.println("Failed to register arrow: " + field.getClass().getSimpleName());

@@ -5,14 +5,14 @@ import com.dragoncommissions.moararrows.arrows.CustomArrow;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Arrow;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
+
+import static com.dragoncommissions.moararrows.MoarArrowsConfig.*;
 
 public class DiamondArrow extends CustomArrow {
     @Override
@@ -37,8 +37,8 @@ public class DiamondArrow extends CustomArrow {
 
     @Override
     public void onKill(Arrow arrowEntity, EntityDeathEvent event) {
-        event.getDrops().add(new ItemStack(Material.GOLD_INGOT, new Random().nextInt(6)));
-        event.getDrops().add(new ItemStack(Material.DIAMOND, new Random().nextInt(4) + 3));
-        event.getDrops().add(new ItemStack(Material.ENDER_PEARL, new Random().nextInt(3)));
+        event.getDrops().add(new ItemStack(Material.GOLD_INGOT, new Random().nextInt(DIAMOND_ARROW_GOLD_DROPS_MAX - DIAMOND_ARROW_GOLD_DROPS_MIN) + DIAMOND_ARROW_GOLD_DROPS_MIN));
+        event.getDrops().add(new ItemStack(Material.DIAMOND, new Random().nextInt(DIAMOND_ARROW_DIAMOND_DROPS_MAX - DIAMOND_ARROW_DIAMOND_DROPS_MIN) + DIAMOND_ARROW_DIAMOND_DROPS_MIN));
+        event.getDrops().add(new ItemStack(Material.ENDER_PEARL, new Random().nextInt(DIAMOND_ARROW_ENDER_PEARL_DROPS_MAX - DIAMOND_ARROW_ENDER_PEARL_DROPS_MIN) + DIAMOND_ARROW_ENDER_PEARL_DROPS_MIN));
     }
 }

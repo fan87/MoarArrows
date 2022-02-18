@@ -1,5 +1,6 @@
 package com.dragoncommissions.moararrows.arrows.impl;
 
+import com.dragoncommissions.moararrows.MoarArrowsConfig;
 import com.dragoncommissions.moararrows.addons.NameSpace;
 import com.dragoncommissions.moararrows.arrows.CustomArrow;
 import lombok.AllArgsConstructor;
@@ -18,8 +19,6 @@ import java.util.List;
 
 public class BundleOfArrows extends CustomArrow {
 
-    private final static int ARROWS_COUNT = 5;
-    private final static float SPREAD_ANGLE = 45.0f;
 
     @Override
     public List<String> getLore() {
@@ -43,10 +42,10 @@ public class BundleOfArrows extends CustomArrow {
 
     @Override
     public void onSpawn(Entity arrowEntity) {
-        float angleDiff = (SPREAD_ANGLE/(ARROWS_COUNT - 1));
-        for (int i = 0; i < ARROWS_COUNT; i++) {
-            if (ARROWS_COUNT % 2 == 1 && i == ARROWS_COUNT/2) continue; // If it's the middle one
-            float additionAngle = (-SPREAD_ANGLE/2f + angleDiff*i);
+        float angleDiff = (MoarArrowsConfig.BUNDLE_OF_ARROWS_SPREAD_ANGLE/(MoarArrowsConfig.BUNDLE_OF_ARROWS_SPREAD_AMOUNT - 1));
+        for (int i = 0; i < MoarArrowsConfig.BUNDLE_OF_ARROWS_SPREAD_AMOUNT; i++) {
+            if (MoarArrowsConfig.BUNDLE_OF_ARROWS_SPREAD_AMOUNT % 2 == 1 && i == MoarArrowsConfig.BUNDLE_OF_ARROWS_SPREAD_AMOUNT/2) continue; // If it's the middle one
+            float additionAngle = (-MoarArrowsConfig.BUNDLE_OF_ARROWS_SPREAD_ANGLE/2f + angleDiff*i);
             ProjectileSource shooter = ((Arrow) arrowEntity).getShooter();
             Location location = arrowEntity.getLocation();
             if (shooter instanceof Player) {
@@ -56,7 +55,7 @@ public class BundleOfArrows extends CustomArrow {
             Vector vector = getVector(location.getYaw(), location.getPitch(), additionAngle);
             arrowEntity.getWorld().spawnArrow(location, vector, ((float) arrowEntity.getVelocity().length()), 1f);
         }
-        if (ARROWS_COUNT % 2 == 0) arrowEntity.remove();
+        if (MoarArrowsConfig.BUNDLE_OF_ARROWS_SPREAD_AMOUNT % 2 == 0) arrowEntity.remove();
     }
 
 
