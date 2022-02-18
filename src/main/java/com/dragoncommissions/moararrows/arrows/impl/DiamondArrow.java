@@ -2,6 +2,7 @@ package com.dragoncommissions.moararrows.arrows.impl;
 
 import com.dragoncommissions.moararrows.addons.NameSpace;
 import com.dragoncommissions.moararrows.arrows.CustomArrow;
+import com.dragoncommissions.moararrows.utils.LoreUtils;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Arrow;
@@ -17,7 +18,7 @@ import static com.dragoncommissions.moararrows.MoarArrowsConfig.*;
 public class DiamondArrow extends CustomArrow {
     @Override
     public List<String> getLore() {
-        return Arrays.asList(ChatColor.GRAY + "Killed mobs will drop ender pearl, diamonds and gold.");
+        return LoreUtils.splitLoreForLine(ChatColor.GRAY + "Killed mobs will drop ender pearl, diamonds and gold.");
     }
 
     @Override

@@ -12,15 +12,24 @@ public class MoarArrowsConfig {
     @ConfigComment("How many arrows will be shot")
     public static final int BUNDLE_OF_ARROWS_SPREAD_AMOUNT = 5;
 
+    @ConfigComment("Diamond Arrow - Min amount of diamond drop")
     public static final int DIAMOND_ARROW_DIAMOND_DROPS_MIN = 4;
+    @ConfigComment("Diamond Arrow - Max amount of diamond drop")
     public static final int DIAMOND_ARROW_DIAMOND_DROPS_MAX = 7;
+    @ConfigComment("Diamond Arrow - Min amount of gold drop")
     public static final int DIAMOND_ARROW_GOLD_DROPS_MIN = 0;
+    @ConfigComment("Diamond Arrow - Max amount of gold drop")
     public static final int DIAMOND_ARROW_GOLD_DROPS_MAX = 6;
+    @ConfigComment("Diamond Arrow - Min amount of ender pearl drop")
     public static final int DIAMOND_ARROW_ENDER_PEARL_DROPS_MIN = 2;
+    @ConfigComment("Diamond Arrow - Max amount of ender pearl drop")
     public static final int DIAMOND_ARROW_ENDER_PEARL_DROPS_MAX = 3;
 
     @ConfigComment("3 is fast enough, it's around 60 BPS, which is super fast in minecraft")
     public static final double ENDER_CRYSTAL_ARROW_MULTIPLIER = 5;
+
+    @ConfigComment("How many times of damage should Infinity Arrow take?")
+    public static final double INFINITY_ARROW_DAMAGE_MULTIPLIER = 3;
 
     @Retention(RetentionPolicy.RUNTIME)
     @Target(ElementType.FIELD)

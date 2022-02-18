@@ -25,7 +25,7 @@ public class NameSpace {
     }
 
     protected static String getMidString() {
-        return "::";
+        return ":";
     }
 
     protected static String getDefaultAddonName() {

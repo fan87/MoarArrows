@@ -2,24 +2,18 @@ package com.dragoncommissions.moararrows.arrows;
 
 import com.dragoncommissions.moararrows.MoarArrows;
 import com.dragoncommissions.moararrows.addons.NameSpace;
-import com.dragoncommissions.moararrows.arrows.impl.BundleOfArrows;
-import com.dragoncommissions.moararrows.arrows.impl.DiamondArrow;
-import com.dragoncommissions.moararrows.arrows.impl.EndCrystalArrow;
+import com.dragoncommissions.moararrows.arrows.impl.*;
 import lombok.Getter;
 import lombok.SneakyThrows;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Arrow;
-import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
-import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
-import org.bukkit.event.entity.EntityDamageByEntityEvent;
-import org.bukkit.event.entity.EntityDamageEvent;
-import org.bukkit.event.entity.EntityDeathEvent;
-import org.bukkit.event.entity.EntityShootBowEvent;
+import org.bukkit.event.entity.*;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.plugin.Plugin;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
@@ -37,6 +31,8 @@ public class Arrows implements Listener {
     public static final BundleOfArrows BUNDLE_OF_ARROWS = new BundleOfArrows();
     public static final DiamondArrow DIAMOND_ARROW = new DiamondArrow();
     public static final EndCrystalArrow END_CRYSTAL_ARROW = new EndCrystalArrow();
+    public static final FishArrow FISH_ARROW = new FishArrow();
+    public static InfinityArrow INFINITY_ARROW;
 
     static {
         for (Field field : Arrows.class.getDeclaredFields()) {
@@ -46,6 +42,7 @@ public class Arrows implements Listener {
             ) {
                 try {
                     CustomArrow customArrow = (CustomArrow) field.get(null);
+                    if (customArrow == null) continue;
                     registerCustomArrow(customArrow);
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -77,6 +74,8 @@ public class Arrows implements Listener {
     @SneakyThrows
     public Arrows(MoarArrows plugin) {
         this.plugin = plugin;
+        INFINITY_ARROW = new InfinityArrow(plugin);
+        registerCustomArrow(INFINITY_ARROW);
     }
 
     public void onEnable() {
@@ -89,6 +88,15 @@ public class Arrows implements Listener {
                 specialArrows.get(arrow).onTick(arrow);
             }
         }, 0, 0);
+    }
+
+    @EventHandler
+    public void onHit(EntityDamageByEntityEvent event) {
+        if (!(event.getDamager() instanceof Arrow)) return;
+        if (!(event.getEntity() instanceof LivingEntity)) return;
+        CustomArrow customArrow = specialArrows.get((Arrow) event.getDamager());
+        if (customArrow == null) return;
+        customArrow.onEntityShot(event);
     }
 
     @EventHandler
@@ -108,7 +116,7 @@ public class Arrows implements Listener {
         if (!(event.getEntity().getLastDamageCause() instanceof EntityDamageByEntityEvent)) return;
         EntityDamageByEntityEvent lastDamageCause = (EntityDamageByEntityEvent) event.getEntity().getLastDamageCause();
         if (!(lastDamageCause.getDamager() instanceof Arrow)) return;
-        CustomArrow customArrow = specialArrows.get(lastDamageCause.getDamager());
+        CustomArrow customArrow = specialArrows.get((Arrow) lastDamageCause.getDamager());
         if (customArrow == null) return;
         customArrow.onKill(((Arrow) lastDamageCause.getDamager()), event);
     }

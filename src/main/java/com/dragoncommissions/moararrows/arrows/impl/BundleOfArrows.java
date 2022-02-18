@@ -48,6 +48,7 @@ public class BundleOfArrows extends CustomArrow {
             float additionAngle = (-MoarArrowsConfig.BUNDLE_OF_ARROWS_SPREAD_ANGLE/2f + angleDiff*i);
             ProjectileSource shooter = ((Arrow) arrowEntity).getShooter();
             Location location = arrowEntity.getLocation();
+            location.setYaw(180 - location.getYaw());
             if (shooter instanceof Player) {
                 location.setYaw(((Player) shooter).getLocation().getYaw());
                 location.setPitch(((Player) shooter).getLocation().getPitch());
