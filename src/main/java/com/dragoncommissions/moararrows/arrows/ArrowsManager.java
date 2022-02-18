@@ -63,6 +63,7 @@ public class ArrowsManager implements Listener {
     }
 
     public static void registerCustomArrow(CustomArrow arrow) {
+        arrow.getConfig();
         registeredArrows.put(arrow.getNamespace(), arrow);
         MoarArrows.registerListener(arrow);
     }
@@ -92,7 +93,9 @@ public class ArrowsManager implements Listener {
                     CustomArrow remove = specialArrows.remove(arrow);
                     continue;
                 }
-                specialArrows.get(arrow).onTick(arrow);
+                CustomArrow customArrow = specialArrows.get(arrow);
+                customArrow.spawnParticle(arrow);
+                customArrow.onTick(arrow);
             }
         }, 0, 0);
     }

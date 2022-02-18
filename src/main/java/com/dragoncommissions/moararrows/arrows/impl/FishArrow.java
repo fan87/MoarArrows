@@ -27,10 +27,10 @@ public class FishArrow extends CustomArrow {
 
     public FishArrow() {
         Bukkit.addRecipe(new ShapedRecipe(new NamespacedKey("moararrows", "fish_arrow"), new ItemStackBuilder(newItemStack()).setAmount(1).build())
-                .shape("csc", "sas", "csc")
+                .shape("scs", "cac", "scs")
                 .setIngredient('a', new ArrowRecipeChoice())
-                .setIngredient('c', new RecipeChoice.MaterialChoice(Material.COD))
-                .setIngredient('s', new RecipeChoice.MaterialChoice(Material.SALMON))
+                .setIngredient('c', new RecipeChoice.MaterialChoice(Material.COOKED_COD))
+                .setIngredient('s', new RecipeChoice.MaterialChoice(Material.COOKED_SALMON))
         );
     }
 

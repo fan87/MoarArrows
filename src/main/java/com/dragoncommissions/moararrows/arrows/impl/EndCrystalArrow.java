@@ -14,6 +14,7 @@ import org.bukkit.inventory.RecipeChoice;
 import org.bukkit.inventory.ShapedRecipe;
 import org.bukkit.inventory.ShapelessRecipe;
 import org.bukkit.util.Vector;
+import xyz.xenondevs.particle.ParticleEffect;
 
 import java.util.List;
 
@@ -50,7 +51,12 @@ public class EndCrystalArrow extends CustomArrow {
     public void onSpawn(Entity arrowEntity) {
         arrowEntity.setGravity(false);
         arrowEntity.getLocation().setDirection(arrowEntity.getVelocity());
-        arrowEntity.setVelocity(arrowEntity.getVelocity().multiply(MoarArrowsConfig.ENDER_CRYSTAL_ARROW_MULTIPLIER));
+        Vector direction = arrowEntity.getLocation().getDirection();
+        arrowEntity.setVelocity(new Vector(
+                -direction.getX() * MoarArrowsConfig.ENDER_CRYSTAL_ARROW_MULTIPLIER,
+                -direction.getY() * MoarArrowsConfig.ENDER_CRYSTAL_ARROW_MULTIPLIER,
+                direction.getZ() * MoarArrowsConfig.ENDER_CRYSTAL_ARROW_MULTIPLIER));
+
     }
 
     @Override
@@ -62,5 +68,6 @@ public class EndCrystalArrow extends CustomArrow {
                     -direction.getY() * MoarArrowsConfig.ENDER_CRYSTAL_ARROW_MULTIPLIER,
                     direction.getZ() * MoarArrowsConfig.ENDER_CRYSTAL_ARROW_MULTIPLIER));
         }
+
     }
 }

@@ -7,7 +7,7 @@ commands:
   givearrow:
     usage: /givearrow [Arrow Name] [Amount]
     permission: moararrows.givearrow
-    description: Gives you arrows. Open the Gui without argument.
+    description: Gives you arrows. Open the Gui if there's no argument.
   moararrows-reload:
     usage: /moararrows-reload
     permission: moararrows.reload

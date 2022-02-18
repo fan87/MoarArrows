@@ -38,6 +38,7 @@ public class InfinityArrow extends CustomArrow {
             if (customArrow == this) continue;
             recipe.addIngredient(new CustomArrowRecipeChoice(customArrow));
         }
+        recipe.addIngredient(Material.DIAMOND_BLOCK);
         Bukkit.addRecipe(recipe);
     }
 
@@ -75,6 +76,8 @@ public class InfinityArrow extends CustomArrow {
             }
         }, 40);
     }
+
+
 
     @Override
     public void onEntityShot(EntityDamageByEntityEvent event) {

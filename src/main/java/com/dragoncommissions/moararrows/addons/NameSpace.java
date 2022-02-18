@@ -24,7 +24,7 @@ public class NameSpace {
         this.namespace = namespace;
     }
 
-    protected static String getMidString() {
+    public static String getMidString() {
         return ":";
     }
 
