@@ -4,6 +4,7 @@ import com.dragoncommissions.moararrows.addons.NameSpace;
 import org.bukkit.Material;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Entity;
+import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
@@ -26,10 +27,10 @@ public abstract class CustomArrow {
         return itemStack;
     }
 
-    public void onTick(Arrow arrowEntity) {} // Todo: Call the method
+    public void onTick(Arrow arrowEntity) {}
     public void onSpawn(Entity arrowEntity) {}
     public void onHit(Arrow arrowEntity, Entity entityGotShot) {} // Todo: Call the method
-    public void onKill(Arrow arrowEntity, Entity entityGotShot) {} // Todo: Call the method
+    public void onKill(Arrow arrowEntity, EntityDeathEvent event) {}
 
     public boolean is(ItemStack itemStack) {
         try {

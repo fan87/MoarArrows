@@ -23,7 +23,7 @@ public class BundleOfArrows extends CustomArrow {
 
     @Override
     public List<String> getLore() {
-        return Arrays.asList(ChatColor.DARK_GRAY + "Fires multiple arrows at the same time.");
+        return Arrays.asList(ChatColor.GRAY + "Fires multiple arrows at the same time.");
     }
 
     @Override

@@ -17,6 +17,8 @@ public final class MoarArrows extends JavaPlugin {
 
         getServer().getPluginManager().registerEvents(arrows, this);
 
+
+        arrows.onEnable();
     }
 
     @Override
