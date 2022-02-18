@@ -1,3 +1,2 @@
-Arrow Pickup
-Dispenser Fix
-Don't remove infinity arrow if player has disconnected
+Make dispenser do stuff better.
+Give infinity arrow back before player disconnects

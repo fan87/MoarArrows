@@ -31,6 +31,9 @@ public class MoarArrowsConfig {
     @ConfigComment("How many times of damage should Infinity Arrow take?")
     public static double INFINITY_ARROW_DAMAGE_MULTIPLIER = 3;
 
+    @ConfigComment("Will player be able to pick arrows up?")
+    public static boolean ARROW_PICKUP = true;
+
     @Retention(RetentionPolicy.RUNTIME)
     @Target(ElementType.FIELD)
     public @interface ConfigComment {

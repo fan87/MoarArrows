@@ -1,17 +1,23 @@
 package com.dragoncommissions.moararrows.arrows;
 
 import com.dragoncommissions.moararrows.MoarArrows;
+import com.dragoncommissions.moararrows.MoarArrowsConfig;
 import com.dragoncommissions.moararrows.addons.NameSpace;
 import com.dragoncommissions.moararrows.arrows.impl.*;
 import lombok.Getter;
 import lombok.SneakyThrows;
 import org.bukkit.Bukkit;
+import org.bukkit.Material;
+import org.bukkit.entity.AbstractArrow;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.BlockDispenseEvent;
 import org.bukkit.event.entity.*;
+import org.bukkit.event.inventory.CraftItemEvent;
+import org.bukkit.event.player.PlayerPickupArrowEvent;
 import org.bukkit.inventory.ItemStack;
 
 import java.lang.reflect.Field;
@@ -29,8 +35,8 @@ public class ArrowsManager implements Listener {
 
     public static final BundleOfArrows BUNDLE_OF_ARROWS = new BundleOfArrows();
     public static final DiamondArrow DIAMOND_ARROW = new DiamondArrow();
-    public static final EndCrystalArrow END_CRYSTAL_ARROW = new EndCrystalArrow();
     public static final FishArrow FISH_ARROW = new FishArrow();
+    public static final EndCrystalArrow END_CRYSTAL_ARROW = new EndCrystalArrow();
     public static InfinityArrow INFINITY_ARROW;
 
     static {
@@ -123,8 +129,30 @@ public class ArrowsManager implements Listener {
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
-    public void onDamage(EntityDamageByEntityEvent event) {
-
+    public void onPickup(PlayerPickupArrowEvent event) {
+        if (!(event.getArrow() instanceof Arrow)) return;
+        CustomArrow customArrow = specialArrows.get((Arrow) event.getArrow());
+        if (customArrow == null) return;
+        if (MoarArrowsConfig.ARROW_PICKUP) {
+            event.getItem().setItemStack(customArrow.newItemStack());
+        } else {
+            event.getArrow().setPickupStatus(AbstractArrow.PickupStatus.CREATIVE_ONLY);
+            event.setCancelled(true);
+        }
     }
+
+    @EventHandler
+    public void onBlockDispenseEvent(BlockDispenseEvent event){
+        if(event.getItem().getType().equals(Material.ARROW)){
+            for (CustomArrow customArrow : registeredArrows.values()) {
+                if (customArrow.is(event.getItem())) {
+                    event.setCancelled(true);
+                    return;
+                }
+            }
+
+        }
+    }
+
 
 }

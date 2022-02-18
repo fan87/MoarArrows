@@ -2,14 +2,17 @@ package com.dragoncommissions.moararrows.arrows.impl;
 
 import com.dragoncommissions.moararrows.MoarArrowsConfig;
 import com.dragoncommissions.moararrows.addons.NameSpace;
+import com.dragoncommissions.moararrows.arrows.ArrowRecipeChoice;
 import com.dragoncommissions.moararrows.arrows.CustomArrow;
+import com.dragoncommissions.moararrows.utils.ItemStackBuilder;
 import lombok.AllArgsConstructor;
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
-import org.bukkit.Location;
+import org.bukkit.*;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.RecipeChoice;
+import org.bukkit.inventory.ShapedRecipe;
 import org.bukkit.projectiles.ProjectileSource;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
@@ -19,6 +22,12 @@ import java.util.List;
 
 public class BundleOfArrows extends CustomArrow {
 
+    public BundleOfArrows() {
+        Bukkit.addRecipe(new ShapedRecipe(new NamespacedKey("moararrows", "bundle_of_arrows"), new ItemStackBuilder(newItemStack()).setAmount(5).build())
+                .shape("aaa", "aaa", "aaa")
+                .setIngredient('a', new ArrowRecipeChoice())
+        );
+    }
 
     @Override
     public List<String> getLore() {

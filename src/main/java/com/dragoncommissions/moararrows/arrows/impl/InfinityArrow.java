@@ -3,16 +3,26 @@ package com.dragoncommissions.moararrows.arrows.impl;
 import com.dragoncommissions.moararrows.MoarArrows;
 import com.dragoncommissions.moararrows.MoarArrowsConfig;
 import com.dragoncommissions.moararrows.addons.NameSpace;
+import com.dragoncommissions.moararrows.arrows.ArrowRecipeChoice;
+import com.dragoncommissions.moararrows.arrows.ArrowsManager;
 import com.dragoncommissions.moararrows.arrows.CustomArrow;
+import com.dragoncommissions.moararrows.arrows.CustomArrowRecipeChoice;
 import com.dragoncommissions.moararrows.utils.ColorUtils;
 import com.dragoncommissions.moararrows.utils.InventoryUtils;
+import com.dragoncommissions.moararrows.utils.ItemStackBuilder;
 import com.dragoncommissions.moararrows.utils.LoreUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Material;
+import org.bukkit.NamespacedKey;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.inventory.RecipeChoice;
+import org.bukkit.inventory.ShapedRecipe;
+import org.bukkit.inventory.ShapelessRecipe;
 import org.bukkit.projectiles.ProjectileSource;
 
 import java.util.List;
@@ -23,6 +33,12 @@ public class InfinityArrow extends CustomArrow {
 
     public InfinityArrow(MoarArrows plugin) {
         this.plugin = plugin;
+        ShapelessRecipe recipe = new ShapelessRecipe(new NamespacedKey("moararrows", "infinity_arrow"), new ItemStackBuilder(newItemStack()).setAmount(1).build());
+        for (CustomArrow customArrow : ArrowsManager.getRegisteredArrows().values()) {
+            if (customArrow == this) continue;
+            recipe.addIngredient(new CustomArrowRecipeChoice(customArrow));
+        }
+        Bukkit.addRecipe(recipe);
     }
 
     @Override
@@ -70,4 +86,5 @@ public class InfinityArrow extends CustomArrow {
             ((Player) shooter).sendMessage(getDisplayName() + ChatColor.GREEN + " has came back to you!");
         }
     }
+
 }
