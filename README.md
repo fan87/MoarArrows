@@ -6,7 +6,7 @@ A plugin that adds some cool arrows to your game.
 
 ## Commands
 - `/moararrows-reload` - Reload the config file
-- `/givearrow [Arrow Name] [Amount]` - Gives you arrows. Open the Gui if there's no argument.
+- `/givearrow [Arrow Name] [Amount]` - Gives you arrows. Opens the Gui if there's no argument.
 
 ## Features
 ### Arrows
