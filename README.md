@@ -1,7 +1,7 @@
 
 ![banner](https://storage.gato.host/61068f9c11c02e002297ebf2/3y8JQYgn2.png)
 A plugin that adds some cool arrows to your game.
-- Version: 1.18 (Or above)
+- Version: 1.18.1 (Or above)
 - License: *PLACEHOLDER LICENSE*
 
 ## Commands
