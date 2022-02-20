@@ -11,10 +11,7 @@ import com.dragoncommissions.moararrows.utils.ColorUtils;
 import com.dragoncommissions.moararrows.utils.InventoryUtils;
 import com.dragoncommissions.moararrows.utils.ItemStackBuilder;
 import com.dragoncommissions.moararrows.utils.LoreUtils;
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
-import org.bukkit.Material;
-import org.bukkit.NamespacedKey;
+import org.bukkit.*;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
@@ -68,7 +65,7 @@ public class InfinityArrow extends CustomArrow {
         Bukkit.getScheduler().runTaskLater(plugin, () -> {
             if (arrowEntity.isValid()) {
                 ProjectileSource shooter = ((Arrow) arrowEntity).getShooter();
-                if (shooter instanceof Player) {
+                if (shooter instanceof Player && ((Player) shooter).getGameMode() != GameMode.CREATIVE) {
                     InventoryUtils.giveItem(((Player) shooter), newItemStack());
                     arrowEntity.remove();
                     ((Player) shooter).sendMessage(getDisplayName() + ChatColor.GREEN + " has came back to you!");
@@ -83,7 +80,7 @@ public class InfinityArrow extends CustomArrow {
     public void onEntityShot(EntityDamageByEntityEvent event) {
         event.setDamage(event.getDamage()* MoarArrowsConfig.INFINITY_ARROW_DAMAGE_MULTIPLIER);
         ProjectileSource shooter = ((Arrow) event.getDamager()).getShooter();
-        if (shooter instanceof Player) {
+        if (shooter instanceof Player && ((Player) shooter).getGameMode() != GameMode.CREATIVE) {
             InventoryUtils.giveItem(((Player) shooter), newItemStack());
             event.getDamager().remove();
             ((Player) shooter).sendMessage(getDisplayName() + ChatColor.GREEN + " has came back to you!");
